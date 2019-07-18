@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>猫蛋</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        version="1.0.1";
+    </script>
+</head>
+<body>
+    <form action="">
+    <div id="sc_img" title="更换搜索引擎" onclick="sc_menu()"></div>
+    <div id="sc_menu">
+        <div class="sc_option" title="一个守护你隐私的搜索引擎" onclick="sc_change('miji')" style="background-image: url('./img/miji.png')"></div>
+        <div class="sc_option" title="国内渣度，内容多(暗指广告" onclick="sc_change('baidu')" style="background-image: url('./img/baidu.png')"></div>
+        <div class="sc_option" title="科学上网查资料" onclick="sc_change('google')" style="background-image: url('./img/google.png')"></div>
+        <div class="sc_option" title="秒杀百度的丑UI" onclick="sc_change('bing')" style="background-image: url('./img/bing.png')"></div>
+    </div>
+    <input type="text" name="keywd" id="keywd" autocomplete="off" onfocus="plhd(0)" onblur="plhd(1)" placeholder="Enter For Search!" oninput="rekeywds(1)" >
+    <input type="reset" id="rekeywd" value="x" onclick="rekeywds(0)">
+    </form>
+    <div id="footer"></div>
+    <script>
+        
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
