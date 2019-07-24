@@ -1,20 +1,28 @@
 *{
     margin: 0;
     padding: 0;
-    -moz-user-select: -moz-none; 
+   /*  -moz-user-select: -moz-none; 
     -moz-user-select: none; 
     -o-user-select:none; 
     -khtml-user-select:none; 
     -webkit-user-select:none; 
     -ms-user-select:none; 
-    user-select:none;
+    user-select:none; */
     overflow: hidden;
 }
-
+body{
+    
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
 ::-ms-clear{display: none;}
 ::-ms-reveal{display: none;}
 ::-o-clear{display: none;}
-
+a{
+    text-decoration: none;
+    color: black;
+}
 h1,h2,h3,p,span,div,input{
     font-family: "Microsoft YaHei";
     font-weight:  300;
@@ -26,7 +34,7 @@ input{
     font-weight:  300;
     outline:none;
 }
-input[type="reset"]{
+#rekeywd{
     border: none;
     outline: none;
     width: 25px;
@@ -40,20 +48,20 @@ input[type="reset"]{
     background-color: white;
     display: none;
     z-index: 2;
+    cursor: pointer;
 }
-input[type="reset"]:hover{
+#rekeywd:hover{
     background-color: #f1f1f1;
 }
 #sc_img{
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     position: absolute;
     left: 50%;
     top: 35%;
     transform: translate(-343px, -50%);
     border-radius: 13px;
     z-index: 2;
-    background-image: url("./img/miji.png");
     background-size:100% 100%;
     cursor: pointer;
 }
@@ -70,6 +78,7 @@ input[type="reset"]:hover{
     z-index: 1;
     border-radius: 20px;
     transition: 250ms;
+    background-color: #ffffff;
 }
 .sc_option{
     width: 32px;
@@ -81,6 +90,7 @@ input[type="reset"]:hover{
 }
 .sc_option:hover{
     background-color: #f1f1f1;
+    border-radius: 20px;
 }
 #keywd{
     width: 700px;
@@ -95,12 +105,107 @@ input[type="reset"]:hover{
     font-size: 19px;
     z-index: 1;
 }
+#plus{
+    width: 36px;
+    height: 160px;
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    transform: translate(0, 0);
+}
+.plus_option{
+    width: 32px;
+    height: 32px;
+    background-size: 100% 100%;
+    cursor: pointer;
+    margin: 8px auto;
+    filter: alpha(opacity=500);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    background-color: #646464b2;
+    border-radius: 20px;
+    transition: 250ms;
+}
+.plus_option:hover{
+    border-radius: 20px;
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
+#manual{
+    width: 500px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.55);
+    transition:500ms;
+    overflow: hidden;
+}
+#faq,#set,#link{
+    width: 500px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.55);
+    transition:500ms;
+    overflow: hidden;
+}
+#manual>*{
+    margin: 9px;
+}
+#manual>div{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(165px, -25px);
+    filter: alpha(opacity=700);
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+    opacity: 0.7;
+    z-index: 5;
+    transition: 250ms;
+    cursor: pointer;
+}
+#manual>div:hover{
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
 #footer{
+    color: white;
     position: absolute;
     height: 25px;
     left: 50%;
     bottom: 5px;
     transform: translate(-50%, 0);
+    filter: alpha(opacity=700);
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+    opacity: 0.7;
+    text-shadow: 1px 1px 1px black;
+    transition: 250ms;
+}
+#footer:hover{
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
+#footer>small>a{
+    color: white;
 }
 
 
