@@ -15,7 +15,7 @@ body{
     background-attachment: fixed;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-image: url('https://alycloudreve.oss-cn-beijing.aliyuncs.com/20190704//1_bg.jpg?OSSAccessKeyId=LTAIWQg4Wxw33m5K&Expires=1563982591&Signature=99vVuAHJ9n0wx3WdMIBpsix5vks%3D');
+    background-image: url('./bg.jpg');
 }
 ::-ms-clear{display: none;}
 ::-ms-reveal{display: none;}
