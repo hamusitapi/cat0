@@ -1,3 +1,8 @@
+//dom
+    var reinput=document.getElementById("rekeywd");
+    var keywdinput=document.getElementById("keywd");
+    var sc_menu_dom=document.getElementById("sc_menu");
+    var sc_img_dom=document.getElementById("sc_img");
 //版本号
     var version;
     console.log("版本号"+version);
@@ -18,7 +23,8 @@ try{
     var firstload=checkCookie("firstload","done");
     if (firstload=="") {
         console.log("firstload!");
-        close_manual("open");
+        setTimeout("close_manual('open')",800)
+        
     }else{
         console.log("not firstload!");
         close_manual("close");
@@ -31,47 +37,52 @@ try{
         
     }
 
+    var options_dom
     function option(s) {
-        var options_dom=document.getElementById(s);
+        options_dom=document.getElementById(s);
         if (s=="link"){
             o_i=0;
             if (option_tg[o_i]==0) {
-                options_dom.style.height="320px";
-                option_tg[o_i]=1;
+                option_tg_on(o_i);
             }else{
-                options_dom.style.height="0px";
-                option_tg[o_i]=0;
+                option_tg_off(o_i)
             }
         }
         if (s=="set"){
             o_i=1;
             if (option_tg[o_i]==0) {
-                options_dom.style.height="320px";
-                option_tg[o_i]=1;
-            }
-            else{
-                options_dom.style.height="0px";
-                option_tg[o_i]=0;
+                option_tg_on(o_i);
+            }else{
+                option_tg_off(o_i)
             }
         }
         if (s=="faq"){
             o_i=2;
             if (option_tg[o_i]==0) {
-                options_dom.style.height="320px";
-                option_tg[o_i]=1;
-            }
-            else{
-                options_dom.style.height="0px";
-                option_tg[o_i]=0;
+                option_tg_on(o_i);
+            }else{
+                option_tg_off(o_i)
             }
         }
+    }
+    function option_tg_on(o_i) {
+        options_dom.style.height="320px";
+        options_dom.style.backgroundColor="rgba(0, 0, 0, 0.55)"
+        option_tg[o_i]=1;
+    }
+    function option_tg_off(o_i) {
+        options_dom.style.height="0px";
+        options_dom.style.backgroundColor="rgba(0, 0, 0, 0.1)"
+        option_tg[o_i]=0;
     }
     function close_manual(bl) {
         if (bl=="open") {
             document.getElementById("manual").style.height="250px";
+            document.getElementById("manual").style.backgroundColor="rgba(0, 0, 0, 0.55)"
         }
         if (bl=="close") {
             document.getElementById("manual").style.height="0px";
+            document.getElementById("manual").style.backgroundColor="rgba(0, 0, 0, 0)"
         }
     }
 //cookie调用函数
@@ -108,31 +119,50 @@ try{
         var e = event || window.event || arguments.callee.caller.arguments[0];    
         if(e && e.keyCode==13){ // enter 键
             var keywds=document.getElementById("keywd").value;
-            if (keywds=="") {
-                return false;
-            }
-            console.log("搜索！");
-            if (sc_kind=="miji") {
-                window.open("https://mijisou.com/?q="+keywds); 
-            }
-            if (sc_kind=="baidu") {
-                window.open("https://www.baidu.com/s?wd="+keywds); 
-            }
-            if (sc_kind=="google") {
-                window.open("https://www.google.com/search?q="+keywds); 
-            }
-            if (sc_kind=="bing") {
-                window.open("https://cn.bing.com/search?q="+keywds); 
-            }
+            sc(keywds);
             return false;
         }
     }; 
+//关键词
+    keywdinput.onkeyup = function () {
+        var value = keywdinput.value;
+        var oScript = document.createElement('script');
+        oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + value + '&cb=outkywd'
+        document.body.appendChild(oScript);
+        oScript.remove();
+    }
+    function outkywd(data) {
+        var list = data.s;
+        console.log(list);
+        var str = '';
+        for(i=0;i<=10&&list[i]!=undefined;i=i+1){
+            str += "<div class=\"keywds_1\" onclick=\"sc('"+list[i]+"')\">" + list[i] + '</div>';
+        }
+        console.log(str);
+        document.getElementById("keywds").innerHTML=str;
+    }
+//搜索
+    function sc(keywds) {
+        console.log("搜索！");
+        keywds=encodeURIComponent(keywds);
+        if (sc_kind=="miji") {
+            window.open("https://mijisou.com/?q="+keywds); 
+        }
+        if (sc_kind=="baidu") {
+            window.open("https://www.baidu.com/s?wd="+keywds); 
+        }
+        if (sc_kind=="google") {
+            window.open("https://www.google.com/search?q="+keywds); 
+        }
+        if (sc_kind=="bing") {
+            window.open("https://cn.bing.com/search?q="+keywds); 
+        }
+        if (keywds=="") {
+            return false;
+        }
+    }
 //输入框相关
-    var reinput=document.getElementById("rekeywd");
-    var keywdinput=document.getElementById("keywd");
     function rekeywds(i) {
-        var reinput=document.getElementById("rekeywd");
-        var keywdinput=document.getElementById("keywd");
         var keywd=keywdinput.value;
         if (i==1) {
             reinput.style.display="block";
@@ -158,20 +188,20 @@ try{
 //搜索引擎选择
     var sc_menu_o=0;
     function sc_menu() {
-        var sc_menu_dom=document.getElementById("sc_menu");
         if (sc_menu_o==0) {
             sc_menu_dom.style.height="170px";
             sc_menu_dom.style.border="1px #808080 solid";
+            sc_menu_dom.style.backgroundColor="rgba(255, 255, 255, 1)"
             sc_menu_o=1;
         }else{
             sc_menu_dom.style.height="0px";
             sc_menu_dom.style.border="";
             sc_menu_dom.style.borderRadius="";
+            sc_menu_dom.style.backgroundColor="rgba(255, 255, 255, 0)"
             sc_menu_o=0;
         }
     }
     function sc_change(scr_name) {
-        var sc_img_dom=document.getElementById("sc_img");
         if (scr_name=="miji") {
             sc_img_dom.innerHTML="<svg t=\"1563627149093\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2730\" width=\"32\" height=\"32\"><path d=\"M517.864056 487.834624c-56.774051-54.213739-58.850339-144.187937-4.6366-200.960964 54.212716-56.773028 144.187937-58.849316 200.960964-4.6366 56.775074 54.213739 58.850339 144.186913 4.6366 200.960964C664.613328 539.972075 574.639131 542.048363 517.864056 487.834624zM687.194626 452.994118c37.533848-39.308261 36.09508-101.596909-3.210112-139.128711-39.304168-37.531801-101.593839-36.094056-139.127687 3.211135-37.532825 39.307238-36.093033 101.593839 3.212158 139.125641C587.374176 493.736031 649.660778 492.302379 687.194626 452.994118zM479.104287 670.917406l-101.495602 106.289792c26.206872 25.024953 27.167756 66.540486 2.14178 92.749404-25.028023 26.209942-66.543555 27.16571-92.750427 2.140757l-58.361199 53.027727c0 0-68.750827 11.100826-100.379175-19.101033-31.630395-30.205952-37.865399-112.721271-37.865399-112.721271l246.37427-258.302951c-63.173808-117.608581-47.24707-267.162736 49.939389-368.939747 36.517705-38.242999 80.346933-65.156976 127.165238-81.040734l1.084705 46.269813c-35.443233 14.07967-68.566632 35.596729-96.618525 64.973804-80.271208 84.064604-96.099708 205.865671-49.433876 305.083393l23.075555 39.163975L146.090774 798.015106c0 0 0.593518 49.77873 17.242709 65.677838 14.888082 14.216793 61.832254 9.828856 61.832254 9.828856l60.407812-63.260789 31.631418 30.203906c8.741082 8.346085 22.570042 8.030907 30.91715-0.711198 8.347109-8.742105 8.026814-22.571065-0.713244-30.91715l-31.632441-30.207999 156.456355-163.846672 39.009456 22.481014c101.259218 42.039465 222.201731 20.61041 302.474986-63.453171 104.251366-109.178585 100.260471-282.211477-8.91709-386.464889-33.591049-32.075533-73.260537-53.829999-115.093295-65.49262l-1.030469-45.153386c53.197596 12.471033 103.945397 38.547944 146.323577 79.015611 126.645398 120.931257 131.277906 321.649698 10.344602 448.296119C748.158093 705.787588 599.500355 728.598106 479.104287 670.917406z\" p-id=\"2731\" fill=\"#707070\"></path></svg>";
             sc_menu();
