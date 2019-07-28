@@ -109,7 +109,7 @@
 //按键检测
     document.onkeydown=function(event){
         var e = event || window.event || arguments.callee.caller.arguments[0];    
-        if(e && e.keyCode==13){ // enter 键
+        if(e||e.keyCode==13){ // enter 键
             var keywds=document.getElementById("keywd").value;
             sc(keywds);
             return false;
@@ -127,7 +127,7 @@
         var list = data.s;
         console.log(list);
         var str = '';
-        for(i=0;i<=10&&list[i]!=undefined;i=i+1){
+        for(i=0;i<=5&&list[i]!=undefined;i=i+1){
             str += "<div class=\"keywds_1\" onclick=\"sc('"+list[i]+"')\">" + list[i] + '</div>';
         }
         console.log(str);
